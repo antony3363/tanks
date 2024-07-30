@@ -1272,7 +1272,7 @@ class Game:
         self.scores_file = open("scores/scores.txt")
         self.scores = [0] * 10
         self.read_scores()
-        print(self.scores)
+        #print(self.scores)
 
         self.nr_of_players = 1
 
@@ -1290,7 +1290,6 @@ class Game:
             for letter in row:
                 if letter == "\n":
                     for i in range(len(score) - 1, -1, -1):
-                        print(score[i])
                         number += score[i] * k
                         k *= 10
                     self.scores[count] = number
@@ -1298,9 +1297,11 @@ class Game:
                     number = 0
                     space = 0
                     k = 1
+                    score = []
 
                 if space == 1:
                     score.append(int(letter))
+                    print(letter)
                 if letter == " ":
                     space = 1
     def new_score(self):
@@ -1310,7 +1311,6 @@ class Game:
                 score = players[i].score
                 for j in range(0, len(self.scores)):
                     if score > self.scores[j]:
-                        print(self.scores[j])
                         score1 = self.scores[j]
                         self.scores[j] = score
                         score = score1
