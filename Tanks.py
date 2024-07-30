@@ -733,10 +733,6 @@ class Tank:
         return int(round(num / (base * 1.0)) * base)
 
     def bullet_impact(self, friendly_fire=False, damage=100, tank=None):
-        """ Bullet impact
-        Return True if bullet should be destroyed on impact. Only enemy friendly-fire
-        doesn't trigger bullet explosion
-        """
 
         global play_sounds, sounds
 
@@ -994,8 +990,6 @@ class Enemy(Tank):
             self.move()
 
     def generate_path(self, direction=None, fix_direction=False):
-        """ If direction is specified, try continue that way, otherwise choose at random
-        """
 
         all_directions = [self.DIR_UP, self.DIR_RIGHT, self.DIR_DOWN, self.DIR_LEFT]
 
@@ -1272,7 +1266,6 @@ class Game:
         self.scores_file = open("scores/scores.txt")
         self.scores = [0] * 10
         self.read_scores()
-        #print(self.scores)
 
         self.nr_of_players = 1
 
@@ -1280,12 +1273,7 @@ class Game:
         del bullets[:]
         del enemies[:]
         del bonuses[:]
-    def read_scores(self):
-        count = 0
-        number = 0
-        space = 0
-        k = 1
-        score = []
+    def read_scores(self, count = 0, number = 0, space = 0, k = 1, score = []):
         for row in self.scores_file:
             for letter in row:
                 if letter == "\n":
@@ -1301,7 +1289,6 @@ class Game:
 
                 if space == 1:
                     score.append(int(letter))
-                    print(letter)
                 if letter == " ":
                     space = 1
     def new_score(self):
@@ -1860,8 +1847,7 @@ class Game:
                     bonuses.remove(bonus)
 
             for label in labels:
-                if not label.active:
-                    labels.remove(label)
+                labels.remove(label)
 
             if not self.game_over:
                 if not castle.active:
