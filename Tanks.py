@@ -477,8 +477,6 @@ class Level:
                     screen.blit(self.tile_grass, tile.topleft)
 
     def update_obstacle_rects(self):
-        """ Set self.obstacle_rects to all tiles' rects that players can destroy
-        with bullets """
 
         global castle
 
@@ -604,14 +602,10 @@ class Tank:
         self.timer_uuid_spawn_end = gtimer.add(1000, lambda: self.end_spawning())
 
     def end_spawning(self):
-        """ End spawning
-        Player becomes operational
-        """
         self.state = self.STATE_ALIVE
         gtimer.destroy(self.timer_uuid_spawn_end)
 
     def toggle_spawn_image(self):
-        """ advance to the next spawn image """
         if self.state != self.STATE_SPAWNING:
             gtimer.destroy(self.timer_uuid_spawn)
             return
@@ -632,7 +626,6 @@ class Tank:
             self.shield_image = self.shield_images[self.shield_index]
 
     def draw(self):
-        """ draw tank """
         global screen
         if self.state == self.STATE_ALIVE:
             screen.blit(self.image, self.rect.topleft)
@@ -644,7 +637,6 @@ class Tank:
             screen.blit(self.spawn_image, self.rect.topleft)
 
     def explode(self):
-        """ start tanks's explosion """
         if self.state != self.STATE_DEAD:
             self.state = self.STATE_EXPLODING
             self.explosion = Explosion(self.rect.topleft)
